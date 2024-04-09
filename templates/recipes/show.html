@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe['title'] }}{% endblock %}
+
+{% block content %}
+
+<div>
+    <img src="{{ recipe['image'] }}"
+       alt="{{ recipe['title'] }}"
+       class="img-thumbnail img-tile">
+    <h1>{{ recipe['title'] }}</h1>
+    <div>
+        <a class="btn btn-primary btn-sm"
+            href="{{ url_for('save_recipe', recipe_id=recipe['id']) }}">Save This Recipe
+        </a>
+        {% if g.user %}
+        <a class="btn btn-primary btn-sm"
+            href="{{ url_for('add_recipe_to_plan', user_id=g.user.id, recipe_id=recipe['id']) }}">Add To Plan
+        </a>
+        {% endif %}
+    </div>
+
+    <h3>Summary</h3>
+    <p>{{ recipe['summary'] }}</p>
+    <small>Servings: <b>{{ recipe['servings'] }}</b>.</small>
+    <small>Ready In <b>{{ recipe['readyInMinutes'] }}</b> Minutes.</small>
+
+    {% if res['vegan'] == 'true' %} <!-- This part is not working yet... -->
+    <p>This dish is vegan friendly!</p>
+    {% elif res['vegan'] == 'false' %}
+    <p>This dish is NOT vegan friendly!</p>
+    {% endif %}
+
+    <h2>List of Ingredients</h2>
+    <ul>
+        {% for ingredient in recipe['extendedIngredients'] %}
+        <li>{{ ingredient['original'] }}</li>
+        {% endfor %}
+    </ul>
+    
+
+
+    <h3>Instructions</h3>
+    <p>{{ recipe['instructions'] }}</p>
+</div>
+
+{% endblock %}

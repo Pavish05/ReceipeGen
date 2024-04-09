@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Searching with Refrigerator{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Showing results</h1>
+</div>
+
+<div>
+    <ul>
+        {% for r in res %}
+        <li class="items">
+            <img src="{{ r.image }}" alt="{{ r.title}}"> <a href="{{ url_for('show_recipe', recipe_id=r.id) }}" class="img-tile"> {{ r.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

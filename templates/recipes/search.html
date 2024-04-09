@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Searching {{ query }}{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Showing results for {{ query }}</h1>
+</div>
+
+<div>
+    <ul>
+        {% for r in res.results %}
+        <li class="items">
+            <img src="{{ r.image }}" alt="{{ r.title}}" class="img-tile"><a href="{{ url_for('show_recipe', recipe_id=r.id) }}" >{{ r.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <small>Showing Results 
+        {% if res.offset+10 >= res.totalResults %}
+        {{ res.totalResults }}
+        {% else %}
+        {{ res.offset + 10 }} 
+        {% endif %}
+        of {{ res.totalResults }}</small>
+
+    {% if res.offset > 0 %}
+    <a class="btn btn-primary btn-sm"
+            href="{{ url_for('search', query=query, num=prev_page) }}">Previous Page
+    </a>
+    {% endif %}
+
+    {% if res.offset+10 < res.totalResults %}
+    <a class="btn btn-primary btn-sm"
+            href="{{ url_for('search', query=query, num=next_page) }}">Next Page
+    </a>
+    {% endif %}
+</div>
+
+{% endblock %}

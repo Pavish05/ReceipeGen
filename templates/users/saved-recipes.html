@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>List of {{ user.username }}'s Saved Recipes</h1>
+</div>
+
+<div>
+    <ul>
+        {% if recipes|length == 0 %}
+            <h3>Sorry, no saved recipes found</h3>
+        {% else %}
+            {% for recipe in recipes %}
+            <li class="items">
+                <a href="{{ url_for('show_recipe', recipe_id=recipe.api_id) }}"><img src="{{ recipe.image }}" alt="{{ recipe.title}}" class="img-tile"><br>{{ recipe.title }}</a><br>
+                <a href="{{ url_for('remove_recipe', user_id=user.id, recipe_id=recipe.id) }}" class="btn btn-outline-secondary">Remove Recipe</a>
+            </li>
+            {% endfor %} <!-- create some buttons so user can edit or unsave these -->
+        {% endif %}
+    </ul>    
+</div>
+
+{% endblock %}

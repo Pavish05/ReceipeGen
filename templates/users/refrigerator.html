@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}My Refrigerator{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Here are the ingredients in my Refrigerator!</h1>
+</div>
+
+<div>
+    <ol>
+        {% if refrigerator|length == 0 %}
+            <h3>Sorry, no saved ingredients found</h3>
+        {% else %}
+            {% for item in refrigerator %}
+            <li>
+                {{ item.title }}
+                <a href="{{ url_for('remove_refrigerator_ingredient', user_id=g.user.id, shopping_cart_id=item.id) }}" class="btn btn-outline-secondary move-right">Remove Ingredient</a> <!-- remove this ingredient -->
+            </li>
+            {% endfor %} <!-- create some buttons so user can edit or unsave these -->
+        {% endif %}
+    </ol>    
+
+    <div class="ml-auto">
+        <a class="btn btn-outline-secondary"
+            href="{{ url_for('user_add_refrigerator', user_id=g.user.id) }}">Add an Ingredient
+        </a>
+    </div>
+</div>
+
+<!-- create some buttons so user can edit or unsave these -->
+<div>
+    <p>Search for recipes that aim for ingredients that are only availiable in the Refrigerator. This is used if you are searching for a recipe and don't have the time to go out to buy any missing ingredients.</p>
+    <a class="btn btn-primary btn-sm"
+            href="{{ url_for('strict_search', user_id=g.user.id) }}">Search
+    </a>  <!-- ranking: 2 -->
+</div>
+
+<div>
+    <p>Search for recipes that include your Refrigerator but may be missing some ingredients. You can save these recipes for later and buy the needed ingredients when you have the time.</p>
+    <a class="btn btn-primary btn-sm"
+            href="{{ url_for('easy_search', user_id=g.user.id) }}">Search
+    </a>
+</div>
+
+{% endblock %}

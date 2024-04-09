@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block content %}
+
+<div id="warbler-hero" class="full-width"></div>
+<img src="{{ user.image_url }}" alt="Image for {{ user.username }}" id="profile-avatar">
+<div class="row full-width">
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-9">
+          <ul class="user-stats nav nav-pills">
+            <li class="stat">
+              <p><a href="/user/{{ user.id }}/saved_recipes">Saved Recipes</a></p>
+            </li>
+            <li class="stat">
+              <p><a href="/user/{{user.id}}/refrigerator">My Refrigerator</a></p>
+            </li>
+            <li class="stat">
+                <p><a href="/user/{{user.id}}/meal_plan">My Meal Plan</a></p>
+              </li>
+            <div class="ml-auto">
+              {% if g.user.id == user.id %}
+              <a href="/user/{{user.id}}/profile/edit" class="btn btn-outline-secondary">Edit Profile</a>
+              {% elif g.user %}
+              {% endif %}
+            </div>
+            <div class="ml-auto">
+                <a class="btn btn-outline-secondary"
+                    href="{{ url_for('add_recipe') }}">Add a Recipe
+            </a>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <p>Welcome to your profile, {{ user.name }}. Here, you can view your saved recipes, add or view what's in your refrigerator, or create a meal plan for the week.</p>
+      <p>You can view or make edits to your saved recipes.</p>
+      <p>You can add ingredients to your refrigerator so you can search what you can currently cook with what you have or determine what you're missing to create a certain dish.</p>
+      <p>You can also create a list of what to eat(breakfast, lunch, or dinner) for the week. This can help you if you have certain goals in mind (i.e. weightloss or bulking).</p>
+    </div> 
+  </div>
+  
+  {% endblock %}

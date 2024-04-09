@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Cuisines{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>List of Cuisines</h1>
+    <ul>
+        {% for c in cuisines %}
+        <li class="cuisine-items"><a href="/cuisine/{{ c.id }}">{{ c.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+{% endblock %}

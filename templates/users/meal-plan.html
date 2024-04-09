@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Meal Plan{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Here is the plan for the week!</h1>
+</div>
+
+{% if plan|length == 0 %}
+    <h2>Currently, No Plan Has Been Made Yet.</h2>
+{% else %}
+
+    <div>
+        <h2>Monday</h2>
+        <ul>
+            {% for meal in plan %}
+            {% if meal.day == 'monday' %}
+            <li>
+                <p>{{meal.day}} {{meal.meal}}, you are eating <a href="{{ url_for('show_recipe', recipe_id=meal.recipe_id) }}">{{meal.recipe_name}}</a>.</p>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Tuesday</h2>
+        <ul>
+            {% for meal in plan %}
+            {% if meal.day == 'tuesday' %}
+            <li>
+                <p>{{meal.day}} {{meal.meal}}, you are eating <a href="{{ url_for('show_recipe', recipe_id=meal.recipe_id) }}">{{meal.recipe_name}}</a>.</p>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Wednesday</h2>
+        <ul>
+            {% for meal in plan %}
+            {% if meal.day == 'wednesday' %}
+            <li>
+                <p>{{meal.day}} {{meal.meal}}, you are eating <a href="{{ url_for('show_recipe', recipe_id=meal.recipe_id) }}">{{meal.recipe_name}}</a>.</p>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Thursday</h2>
+        <ul>
+            {% for meal in plan %}
+            {% if meal.day == 'thursday' %}
+            <li>
+                <p>{{meal.day}} {{meal.meal}}, you are eating <a href="{{ url_for('show_recipe', recipe_id=meal.recipe_id) }}">{{meal.recipe_name}}</a>.</p>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Friday</h2>
+        <ul>
+            {% for meal in plan %}
+            {% if meal.day == 'friday' %}            
+            <li>
+                <p>{{meal.day}} {{meal.meal}}, you are eating <a href="{{ url_for('show_recipe', recipe_id=meal.recipe_id) }}">{{meal.recipe_name}}</a>.</p>
+            </li>           
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Saturday</h2>
+        <ul>
+            {% for meal in plan %}
+            {% if meal.day == 'saturday' %}            
+            <li>
+                <p>{{meal.day}} {{meal.meal}}, you are eating <a href="{{ url_for('show_recipe', recipe_id=meal.recipe_id) }}">{{meal.recipe_name}}</a>.</p>
+            </li>
+            {% endif %}
+            {% endfor %}            
+        </ul>
+    </div>
+
+    <div>
+        <h2>Sunday</h2>
+        <ul>
+            {% for meal in plan %}
+            {% if meal.day == 'sunday' %}            
+            <li>
+                <p>{{meal.day}} {{meal.meal}}, you are eating <a href="{{ url_for('show_recipe', recipe_id=meal.recipe_id) }}">{{meal.recipe_name}}</a>.</p>
+            </li>
+            {% endif %}
+            {% endfor %}            
+        </ul>
+    </div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div style="text-align:center">
+    <h1>Welcome To Food Recipe Search!</h1>
+    <p>You can search for recipes using the cuisines to search through different categories or using the search bar.</p>
+    <p>Log In or Sign Up so you can save and edit recipes for later.</p>
+    <p>Below is a random recipe!</p>
+</div>
+
+<div class="row recipe-listing">
+    <div>
+        <img src="{{ recipes['image'] }}"
+           alt="{{ recipes['title'] }}"
+           class="img-thumbnail img-tile">
+        <h1><a href="/recipe/{{ recipes['id'] }}"> {{ recipes['title'] }}</a></h1>
+        <h3>Summary</h3>
+        <p>{{ recipes['summary'] }}</p>
+        <small>Servings: <b>{{ recipes['servings'] }}</b>.</small>
+        <small>Ready In <b>{{ recipes['readyInMinutes'] }}</b> Minutes.</small>
+    </div>
+</div>
+
+<!--  area for related recipes  -->
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ cuisine.name }}{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>List of {{ cuisine.name }} Cuisines</h1>
+</div>
+
+<div>
+    <ul>
+        {% for c in cuisines.results %}
+        <li class="items">          
+            <a href="{{ url_for('show_recipe', recipe_id=c.id) }}" ><img src="{{ c.image }}" alt="{{ c.title}}" class="img-tile"><br>{{ c.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <small>Showing Results 
+        {% if cuisines.offset+10 >= cuisines.totalResults %}
+        {{ cuisines.totalResults }}
+        {% else %}
+        {{ cuisines.offset + 10 }} 
+        {% endif %}
+        of {{ cuisines.totalResults }}</small>
+
+    {% if cuisines.offset > 0 %}
+    <a class="btn btn-primary btn-sm"
+            href="{{ url_for('cuisine_page', cuisine_id=cuisine.id, num=prev_page) }}">Previous Page
+    </a>
+    {% endif %}
+
+    {% if cuisines.offset+10 < cuisines.totalResults %}
+    <a class="btn btn-primary btn-sm"
+            href="{{ url_for('cuisine_page', cuisine_id=cuisine.id, num=next_page) }}">Next Page
+    </a>
+    {% endif %}
+    
+</div>
+
+
+
+{% endblock %}

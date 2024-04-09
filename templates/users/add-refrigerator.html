@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body_class %}onboarding{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-md-center">
+    <div class="col-md-7 col-lg-5">
+      <h2 class="join-message">Add This Ingredient To Your Refrigerator!</h2>
+      <small>This will have an auto suggestion/complete function but it shows up on the search bar on top. This is not intended and cause the search/adding to work correctly. Use the auto suggestion to fully type into the ingredient form below and submit.</small>
+      <form method="POST" id="user_form">
+        {{ form.hidden_tag() }}
+  
+        {% for field in form if field.widget.input_type != 'hidden' %}
+          {% for error in field.errors %}
+            <span class="text-danger">{{ error }}</span>
+          {% endfor %}
+          <h3>{{ field.label }}</h3>
+          {{ field(placeholder=field.label.text, class="ingredient-form") }}
+        {% endfor %}
+        <div id="choices-container"></div>
+        <button class="btn btn-primary btn-lg btn-block">Confirm!</button>
+      </form>
+    </div>
+</div>
+  
+<script src="/static/ingredient.js"></script>
+{% endblock %}
